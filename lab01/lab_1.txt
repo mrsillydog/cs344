@@ -1,3 +1,5 @@
+Answers for lab01 - Monkey section. Ian Adams, CS344, Spring 2020, Calvin University.
+
 b. i. The GPS problem solver is implemented as a function.
   ii. Initial states and goal states are lists of strings. Operators are lists of dictionaries that map strings to lists of strings.
  iii. Yes. achieve_all() calls achieve() on each goal in goals, which calls

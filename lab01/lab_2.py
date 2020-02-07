@@ -1,5 +1,12 @@
 from gps import gps
 
+################################
+# Lab_2.py
+# Altered from blockworld.py by Ian Adams for CS344 at Calvin University, Spring 2020
+# 
+# Problem specification for two block world GPS problems, as given by the lab.
+################################
+
 problem = {
     # "start1": ["space on a", "a on b", "b on c", "c on table", "space on table"],
     # "finish1": ["space on c", "c on b", "b on a", "a on table", "space on table"],
