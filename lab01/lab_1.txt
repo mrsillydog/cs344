@@ -1,0 +1,48 @@
+b. i. The GPS problem solver is implemented as a function.
+  ii. Initial states and goal states are lists of strings. Operators are lists of dictionaries that map strings to lists of strings.
+ iii. Yes. achieve_all() calls achieve() on each goal in goals, which calls
+	apply_operator(), which calls achieve_all().
+d. i. The Hungry Monkey Puzzle
+  ii. It specifies the action, the precondition states required to perform that
+	action, the states to add to the start states upon finishing that action,
+	and the states to remove from the start states upon finishing that action.
+ iii. For each goal state, the GPS essentially reverse engineers the steps it
+	will have to take in order to reach that end state. It attempts to 
+	achieve the end state by considering each prerequisite state for the
+	end state, and if it lacks the required state, then it considers the
+	prerequisite states for that state, and so on and so forth recursively.
+	Upon reaching an operator that it has all prerequisites for, it takes
+	that operator, updates its current states with the "add" and "delete"
+	lists of the current operator, and attempts to perform the next operator
+	that will continue to bring it up the recursive chain to the goal state.
+	
+	So in the monkey's case, it:
+	1. Tries to achieve 'not hungry' by performing 'eat bananas', but lacks
+	the precondition 'has bananas'
+	2. Tries to achieve 'has bananas' by performing 'grasp bananas', but 
+	lacks 'at bananas' and 'empty handed'
+	3. Tries to achieve 'at bananas' by performing 'climb on chair', but
+	lacks 'chair at middle room'
+	4. Tries to achieve 'chair at middle room' by performing 'push chair
+	from door to middle room'. Achieves both prereqs "chair at door" and
+	"at door". Performs action 'push chair from door to middle room'. 
+	Updates current states, adding 'chair at middle room', 'at middle room',
+	deleting 'chair at door', 'at door'.
+	5. Achieves 'on floor' and tries to perform action 'climb on chair'.
+	Possesses all three preconditions, so adds 'at bananas', 'on chair',
+	removes 'at middle room', 'on floor'.
+	6. Tries to achieve 'empty handed' by performing 'drop ball'. Achieves 
+	precondition 'has ball', so adds 'empty handed' and removes 'has ball'
+	7. Has both 'empty handed' and 'at bananas', so performs action 'grasp
+	bananas'. Adds 'has bananas', removes 'empty handed'.
+	8. Has precondition 'has bananas', so performs action 'eat bananas', 
+	adding 'empty handed' and 'not hungry', removing 'has bananas' and 'hungry'.
+	9. Goal state is now a current state, so the GPS is done.
+  iv. This code is artificially intelligent, but only according to the definition
+	of "acting like a human", or in this case monkey. Its actions are 
+	representative of how a real monkey would behave, but it doesn't really
+	think like a monkey or human does, since all it really does to "think"
+	is to scan all actions and see which ones match what is needed. 
+   v. Yes. It would be applying knowledge to create a solution without simply
+	considering every course of action and seeing if one works, which
+	counts as intelligence in my opinion.
