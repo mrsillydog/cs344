@@ -1,0 +1,84 @@
+Exercise 2.1
+a. Both of the local search algorithms solve the problem, finding the global
+   max at x = 15, value = 15.
+b. Hill-climbing works faster than simulated annealing, at 0.000 seconds 
+   compared to 0.004 seconds. at a starting x = 16.
+c. The starting value does not make any difference; for x = 2, x = 26, and x = 16
+   all results were the same in terms of results and timing.
+d. Changing delta to the default of 0.001 made neither algorithm find a solution.
+   From a starting x=3, hill-climbing got much closer at x=14.999999999997346,
+   compared to simulated annealing at x=2.950000000000005. Part of the reason
+   that simulated annealing did so much worse is that it ran for a much shorter
+   period of time; only 0.003 seconds compared to the 0.059 seconds hill-climbing ran.
+   Simulated annealing couldn't go very far in that amount of time, so didn't get far
+   from the starting point, as opposed to hill-climbing, which just climbed to 
+   almost the summit.
+   Changing delta to 10.0 changed nothing in the result at all.
+e. The exp_schedule() method in the simulated annealing function call denotes
+   the schedule function for simulated annealing. It essentially denotes
+   how the probability of the current state jumping to a worse state changes
+   as the number of jumps already taken increases.
+
+Exercise 2.2
+a. Neither algorithm finds the global maximum. Simulated annealing does a little better
+   than hill-climbing at x = 14.0, value = 13.868502979728184 and x = 11.0, value = 
+   10.999892272057739, but both are quite far off the real value at x = 30. They are
+   both failing because the starting value is x = 12, so hill climbing went
+   straight up the hill to the left for the local max at 11.0, whereas simulated
+   annealing managed to jump to the hill to the right and find the local max at 
+   14.0 there.
+b. The starting value makes a huge difference here; it seems to essentially determine
+   which two maximums will be found by hill climbing and simulated annealing respectively.
+   With a starting value of 27.0, hill climbing stayed there at the local maximum. Simulated
+   annealing actually found a local maximum beyond the problem "max" at x = 36.0, value = 
+   35.704038723952166; there doesn't seem to be code preventing either algorithm going beyond
+   the global max for the given graph. In any case, both algorithms were much closer to the 
+   global max at 30 with a starting value of 27 than they were with a starting value of 12.
+c. Yes. Delta essentially dictates how far from the initial state both algorithms will end up.
+   With a delta of 0.001, both algorithms consistently ended at a final x less than 1 different
+   from their starting value. With a delta of 1, hill-climbing ended up at the nearest local max,
+   but simulated annealing could end up anywhere 20 above or below the initial x.
+   With a delta of 5.0, it wasn't unreasonable for hill-climbing to end up 20-30 above the
+   initial x, and simulated annealing to end up anywhere in an even wider range above or below.
+d. The maximum possible answer is supposed to be 30.0 at x = 30.0, but since there's no
+   code preventing going above the max, there is no actual global max. The minimum possible
+   value is 0. Hill climbing will only hit the max of 30 with an appropriately large delta,
+   or a initial x thats quite close to x = 30 already, so that it's on the farthest "hill"
+   to the right of the graph from the start. Hill-climbing will never end on a value of 0.
+   Simulated annealing has a much better chance of hitting the true global max than hill
+   climbing, even with relatively far away from 30 initial x values and relatively low
+   deltas, but it also has a chance to not end on a local max, meaning it could end
+   with a lower value than hill-climbing despite traveling farther towards x = 30.
+
+Exercise 2.3
+a. Both algorithms tend to find a solution at or above the "global max" of 30
+   quite consistently. This makes sense, since with 19 "half-hills" between 
+   0 and 30, hill climbing should start on the correct half hill 1 in 19 restarts
+   on average. Simulated annealing finds a solution at or above 30 even more
+   frequently, since it doesn't require an initial value right next to 30
+   to find the correct max. All simulations done with delta = 1.0.
+b. Hill-climbing's average tends to be lower than simulated annealing's;
+   the last run I did had an average value of 23.075581637446536 for hill-climbing 
+   and an average value of 33.72931485322643 for simulated annealing.
+c. Simulated annealing does better simply because it has the ability to travel
+   farther from the initial value than hill climbing. Sometimes this backfires
+   and it travels backwards; but because of its schedule and the fact that it
+   has a significantly better chance to move forward than backward, it typically
+   ends up with a better value than hill climbing, which is stuck with the nearest
+   local max.
+
+Exercise 2.4
+a. Local beam search makes more sense for hill climbing. Simulated annealing
+   already has the ability to jump from hill to hill; hill climbing doesn't,
+   so beam search would help it not waste executions on values that would only
+   arrive at low local maximums with random restart hill climbing.
+b. The more states used, the faster the beam search will be completed. However,
+   this also would require more memory. It would be a tradeoff no matter what,
+   so with a reasonable amount of time and space, the most solutions maintainable
+   would be somewhere in the middle; not too few so that it takes too much time,
+   and not too many that it takes too much memory.
+c. I'd use pthreads to allocate k threads, have each one execute a short version
+   of hill-climbing, and then synchronize them on completion. The k states with the 
+   best values would have their x's used as the initial x value for the next iteration
+   of hill-climbing; the threads with the worst k / 2 values would use the k / 2 
+   best x's. Repeat this until a solution is found.
