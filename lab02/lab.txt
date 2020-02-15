@@ -79,6 +79,5 @@ b. The more states used, the faster the beam search will be completed. However,
    and not too many that it takes too much memory.
 c. I'd use pthreads to allocate k threads, have each one execute a short version
    of hill-climbing, and then synchronize them on completion. The k states with the 
-   best values would have their x's used as the initial x value for the next iteration
-   of hill-climbing; the threads with the worst k / 2 values would use the k / 2 
-   best x's. Repeat this until a solution is found.
+   best solutions would have their x's used as the initial x value for the next iteration
+   of hill-climbing. Repeat this until the goal state is found.
