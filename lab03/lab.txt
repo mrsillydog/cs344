@@ -1,0 +1,80 @@
+Ian Adams
+CS344 - Calvin University
+Spring 2020
+3.1
+a. Depth first graph search fails on anything beyond already solved. This is probably because
+   the branching factor of options is massive and isn't pruned at all in the implementation,
+   so it considers the same options multiple times and has a massive number of options to look through.
+   AC3 fails on anything beyond the easy puzzle. It succeeded very quickly on the easy puzzle,
+   and also failed relatively quickly on the harder one. This is because it checks for arc consistency
+   and prunes heavily, so it has to check a relatively low number of values before it runs out of
+   values in its current domain or succeeds.
+   Backtracking search succeeds slowly on the easy puzzle and fails really slowly on the harder puzzle.
+   This is because it fills in values as are legal and backtracks whenever it reaches a state that has
+   no options. However, this means that it can fill in illegal values a lot, has to backtrack a lot,
+   and therefore succeeds or fails really slowly.
+   Min conflicts fails on anything beyond already solved. This it because it has a maximum step value
+   of 100,000, but simply chooses a random conflicted variable to alter to pursue the goal, so it's
+   quite directionless and will therefore have to essentially luck into a solution.
+b. minimum-remaining-values should work better than first-unassigned-variable for sudoku, since instead
+   of simply choosing the first unassigned variable during its variable selection process, it actually
+   tries to choose an intelligent option, allowing it to find conflicts and prune branches more quickly.
+   This lets it search a lower number of states.
+   inference=forward_checking should work better than no_inference, since unlike no_inference it actually
+   prunes neighbor values that are inconsistent with the current variable choice instead of trying
+   options that have no chance of working.
+   With both select_unassigned_variable=mrv & inference=forward_checking, backtracking search can find
+   the solution to even the hardest sudoku essentially instantly. Removing inference=forward_checking
+   makes it unable to solve the harder or hardest puzzle in a reasonable amount of time. Despite having
+   select_unassigned_variable=mrv, it doesn't really solve the easy puzzle any faster than with 
+   select_unassigned_variable=first_unassigned_variable.
+   With just inference=forward_checking, it solves the easy puzzle very quickly, takes a non-instant 
+   but not unreasonable amount of time to solve the harder puzzle, and solves the hardest puzzle in just
+   a few seconds. Interestingly, it takes longer to solve the harder puzzle than the hardest puzzle.
+   Conclusions: best option is both select_unassigned_variable=mrv & inference=forward_checking.
+   forward_checking is more important than mrv, but both are superior over the default options.
+
+3.2
+a. min_conflicts: n = 10000 takes a few minutes to solve. n = 5000 takes 30 seconds or so. n = 1000 
+   is solved in a couple seconds.
+   AC3: n = 100 is solved essentially instantly. n = 500 takes a minute or so to solve. n = 1000 
+   takes a very long time to solve.
+   backtracking_search: With default parameters, backtracking search takes a very long time to solve
+   even n = 100. It solves n = 8 functionally instantly, n = 27 in a few seconds, n = 28 in a minute or so.
+   min_conflicts can solve high n-queens problems because it simply chooses a random queen in its column
+   and moves it to where it conflicts with as few others as possible. Therefore, it quickly reaches a state
+   where every queen conflicts with few others, which is likely close to the goal state.
+   AC3 cannot solve as high n-queens problems as min_conflicts, since its pruning process gets more
+   time-intensive as the number of queens increases and arc-consistency has to be established with
+   more arcs.
+   default parameter backtracking_search is extremely limited in terms of how many queens it can
+   handle because it doesn't prune its search at all, so frequently backtracks onto states that
+   have no chance of ending in a goal state. So even for a number of queens that would be solved
+   in seconds by either of the other algorithms, default parameter backtracking search takes a
+   long time to find a solution.
+b. mrv and forward_checking are the best options; without either, backtracking_search can't really
+   handle even 150 queens but with both it can handle up to around 180. This is because mrv gives
+   the search for a goal state better direction, and forward_checking prunes off options that have
+   no chance of working.
+c. Seemingly independent of problem size, solutions typically take 30-50 steps to achieve. This is
+   because solutions are densely distributed throughout the state space, so from any starting point
+   its a reasonably consistent number of steps to the nearest potential goal state.
+
+3.3
+a. States: traditional seach views states as atomic and indivisible, with no internal structure.
+           CSP views states as a set of variables, each of which has a value.
+   Domains: traditional domains are basically just the set of allowable states.
+            CSP domains are the set of allowable values for each variable in a state.
+   Actions: traditional actions are the list of states to which one can move from the current state.
+	    CSP actions are the list of nonconflicting assignments to an unassigned variable.
+   Results: a traditional result is the state that results from executing a given action.
+	    a CSP result is the state the results from the action that assigned a new value to
+            one of its variables.
+   Goal tests: a traditional goal test just checks to see if the current state matches a goal state.
+	       a CSP goal test checks to see if the current state has all variables assigned with
+               all constraints satisfied.
+b. Traditional problem-solving heuristics are problem-specific, whereas CSP heuristics are 
+   general-purpose. So while a new heuristic must be defined for each search.Problem subclass,
+   heuristics like minimum-remaining-values and least-constraining-values can be used for any
+   subclass of csp.CSP.
+   
