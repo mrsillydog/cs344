@@ -1,0 +1,35 @@
+Exercise 4.3
+
+a. i. P(User) = .089
+  ii. P(Test | User) = 0.99
+ iii. P(!Test | User) = 0.01
+  iv. P(Test | !User) = .02
+   v. P(User | Test) = P(Test | User) * P(User)
+                     = 0.99 * .089
+		     = 0.08811
+      P(!User | Test) = P(Test | !User) * P(!User)
+		      = 0.02 * 0.911
+		      = 0.01822
+      alpha < 0.08811, 0.01822 >
+      alpha = 1 / (0.08811 + 0.01822) = 9.4047
+      P(User | Test) = 0.08811 * 9.4047
+		     = 0.829
+
+b. P(Cancer) = .01
+   P(!Cancer) = .99
+   P(Mammo | Cancer) = .8
+   P(Mammo | !Cancer) = .096
+   P(Cancer | Mammo) = P(Mammo | Cancer) * P(Cancer)
+		     = .8 * .01
+		     = .08
+   P(!Cancer | Mammo) = P(Mammo | !Cancer) * P(!Cancer)
+		      = .096 * .99
+		      = .09504
+   alpha < .08, .09504 >
+   alpha = 1 / (.08 + 0.09504) = 5.713
+   P(Cancer | Mammo) = alpha * .08
+		     = 5.713 * .08 
+		     = .457
+   P(!Cancer | Mammo) = alpha * .09504
+		      = 5.713 * .09504
+		      = .543
