@@ -7,12 +7,17 @@
 # @version 13march2020
 ###############################
 
+#PYTHONPATH = /usr/local/lib/python3.6/dist-packages/
+
 import numpy as np
-from keras.datasets import boston_housing
+from tensorflow.python.keras.datasets import boston_housing
+
+#a.
 (train_images, train_labels), (test_images, test_labels) = boston_housing.load_data()
 
 
 def print_structures():
+    #i. training
     print(
         'training images \
             \n\tcount: {} \
@@ -28,7 +33,7 @@ def print_structures():
             \n\tcount: {} \
             \n\tdimensions: {} \
             \n\tshape: {} \
-            \n\tdata type: {}\n\n.format(
+            \n\tdata type: {}\n\n'.format(
                 len(test_labels), 
                 train_labels.ndim, 
                 test_labels.shape, 
@@ -36,3 +41,10 @@ def print_structures():
         )
     )
 print_structures()
+
+'''
+results: 
+i. 404 training images, 102 testing images
+ii. 2 dimensions, (404,13) shape, float64 data type for training
+    1 dimension, (102,) shape, float64 data type for testing
+'''
