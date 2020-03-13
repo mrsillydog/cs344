@@ -1,0 +1,32 @@
+Exercise 6.2
+
+1. I want the ML model to predict whether or not an email is spam.
+2. My ideal outcome is to discard spam email without discarding non-spam email,
+   without the user having to do so manually.
+3. A success metric is the number of spam emails properly predicted by the model,
+   minus the number of non-spam emails improperly predicted as spam by the model.
+
+   Key Results: Success means consistently correctly predicting 95% or more of 
+   spam emails as spam, while predicting less than .01% of non-spam emails as spam. 
+   
+   Failure means the percentage of emails correctly predicted as spam is no 
+   better than current heuristics or the percentage of emails incorrectly 
+   labeled as spam is higher than .01%.
+4. The output from our ML model will be whether an email is spam or not.
+
+   The output is defined as 1 or 0 (Spam or not spam)
+5. The output from the ML model will be made before the email appears in the
+   user's inbox.
+   The outcome will be used to either place the email in the user's inbox (0)
+   or into their Spam folder (1).
+6. Hardcoded heuristics: an email is spam if it:
+   1) Has non-alphabetical characters in-between alphabetical characters.
+   2) Has sexual terms in it.
+   3) Has the word "click" in it more than twice.
+
+7. a. My problem is best framed as a binary classification.
+   b. My problem already is a binary classification.
+8. Inputs will be strings. Outputs will be 1 (spam) or 0 (not spam).
+9. The inputs come from each word in the email, as separated by whitespace.
+   Each row will be an email, each column will be a string from that email.
+10. "cl1ck" "sexy" "click" -> 1 (spam)

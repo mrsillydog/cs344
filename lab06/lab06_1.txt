@@ -1,0 +1,33 @@
+Exercise 6.1
+Entropy(initial) = -( 1/2 * log2(1/2) + 1/2 * log2(1/2) )
+                 = -( 1/2 * -1 + 1/2 * -1 )
+                 = -( -1/2 - 1/2 )
+                 = -( -1 )
+                 = 1
+
+Hungry:WillWait 
+- Yes:Yes - 5/12
+- Yes:No  - 2/12
+- No:Yes  - 1/12
+- No:No   - 4/12
+
+Remainder(Hungry) = 7/12 * Entropy(Yes) + 5/12 * Entropy(No)
+                  = 7/12 * - (5/7 * log2(5/7) + 2/7 * log2(2/7))
+                  + 5/12 * - (1/5 * log2(1/5) + 4/5 * log2(4/5))
+                  = 7/12 * - (5/7 * 0.48542682717 + 2/7 * -1.80735492206)
+                  + 5/12 * - (1/5 * -2.32192809489 + 4/5 * -0.32192809488)
+                  = 7/12 * - (-0.86312056856) + 5/12 * - (-0.72192809488)
+                  = 0.50348699832 + 0.30080337287
+                  = 0.8042903712
+
+Gain(Hungry) = Entropy(initial) - Remainder(Hungry) 
+             = 1 - 0.8042903712
+             = 0.1957096288
+
+This question would likely be worse than the Patrons? question, but
+better than the Type? question. Gain(Patrons) was significantly higher
+than Gain(Hungry), at 0.54, but Gain(Type) was lower, at 0. However,
+there might be a question below Hungry? that perfectly divides the
+remaining Yes/No WillWait responses, resulting in it being better than
+Patrons?, but purely on the basis of information gain it is inferior to
+Patrons?.
