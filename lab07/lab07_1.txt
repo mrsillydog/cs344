@@ -1,0 +1,14 @@
+Exercise 7.1
+
+a.
+Exercise 1
+cities["Begins with San and 50+ sq. miles"] = (cities["City name"].apply(lambda name: name.startswith("San")) & cities["Area square miles"].apply(lambda area: area > 50))
+cities
+
+Exercise 2
+cities.reindex(np.random.permutation(cities.index + 5))
+
+b. Pandas provides data in a more understandable fashion than NumPy; it provides labeled columns and indexing on the rows, whereas it's very easy to lose track of which column represents what with NumPy. The 2-dimensional DataFrame object is also very convenient.
+
+c. Before random sampling would be one such scenario; therefore, instead of sampling at random indices or risking any organizational non-randomness, one could just randomly reorder the database and take the first X values.
+

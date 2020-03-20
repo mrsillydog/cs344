@@ -1,0 +1,26 @@
+Exercise 7.2
+
+a. Numerical data is data with number values (1, 100.4, 55). Categorical data is data with discrete labels as values ("True" or "False", "Dog" or "Cat" or "Parrot").
+
+b. 
+
+Task 1:
+
+train_model(
+    learning_rate=0.00003,
+    steps=500,
+    batch_size=5
+)
+
+Task 2:
+
+train_model(
+    learning_rate=0.00003,
+    steps=500,
+    batch_size=5,
+    input_feature="population"
+)
+
+c. Hyper-parameters are parameters which dictate how the machine learning algorithm learns, as opposed to the actual data parameters. Put a different way, hyper-parameters are developer-defined with values such that the regular parameters can be better defined by the machine learning algorithm.
+
+There is no standard tuning algorithm for hyper-parameters, since the effects of various hyper-parameters is data dependent. So the only way to truly test their validity is by testing on the data.

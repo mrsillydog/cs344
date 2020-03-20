@@ -1,0 +1,26 @@
+Exercise 7.3
+
+a. 
+
+Task 1
+
+california_housing_dataframe["rooms_per_person"] = california_housing_dataframe["total_rooms"] / california_housing_dataframe["population"]
+
+calibration_data = train_model(
+    learning_rate=0.04,
+    steps=500,
+    batch_size=5,
+    input_feature="rooms_per_person"
+)
+
+Task 2
+
+plt.scatter(calibration_data["predictions"], calibration_data["targets"])
+
+Task 3
+
+california_housing_dataframe["rooms_per_person"].apply(lambda x: min(5, x))
+
+b. Synthetic features which combine two other features allow us to explore how well a combination of multiple parameters predicts or relates to a single target parameter.
+
+c. Outliers are pieces of data with values that very much stand out from the majority of the data. The usual action with outliers is not to get rid of them entirely, but rather to set them to a more acceptable reasonable maximum or minimum value.
