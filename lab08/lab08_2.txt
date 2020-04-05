@@ -1,0 +1,45 @@
+8.2
+a. The Pearson correlation coefficient measures the linear correlation between two variables. The PCC describing the correlation between total_bedrooms and total_rooms is 0.9; this makes sense, since the ratio of rooms to bedrooms is probably quite similar no matter where you are. Therefore, the more rooms there are, the more bedrooms there will be as well, resulting in a strong positive correlation coefficient.
+b.
+Task 1:
+minimal_features = [
+  "median_income",
+  "rooms_per_person"
+]
+
+train_model(
+    learning_rate=0.02,
+    steps=700,
+    batch_size=10,
+    training_examples=minimal_training_examples,
+    training_targets=training_targets,
+    validation_examples=minimal_validation_examples,
+    validation_targets=validation_targets)
+
+RMSE (on training data):
+  period 09 : 84.25
+
+Task 2:
+
+def select_and_transform_features(source_df):
+  selected_examples = pd.DataFrame()
+  selected_examples["median_income"] = source_df["median_income"]
+  selected_examples["distance_from_san_francisco"] = source_df["latitude"] - 38
+  return selected_examples
+
+selected_training_examples = select_and_transform_features(training_examples)
+selected_validation_examples = select_and_transform_features(validation_examples)
+
+_ = train_model(
+    learning_rate=0.02,
+    steps=900,
+    batch_size=5,
+    training_examples=selected_training_examples,
+    training_targets=training_targets,
+    validation_examples=selected_validation_examples,
+    validation_targets=validation_targets)
+
+RMSE (on training data):
+  period 09 : 83.69
+
+My final RMSE was slightly above the solution provided by Google's, but I also used a different synthetic variable.

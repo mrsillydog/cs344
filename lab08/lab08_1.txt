@@ -1,0 +1,57 @@
+Task:
+1. a. It seems a little off that the 75th percentile for rooms_per_person is 2, but the max is 55.2 (for the training set). That sounds like a serious outlier.
+   b. total_rooms max also seems like a bit of an outlier, given the standard deviation of ~2k and the 75th percentile of ~3k.
+   c. I don't really understand what units are being used for median income. Perhaps 10s of thousands? Some sort of log scale?
+2. The standard deviation values for latitude and longitude seem very inconsistent between the training and validation sets. This indicates that the distribution of values between the training and data sets isn't equal in terms of latitude and longitude.
+3. The line that randomly reindexed the data set was commented out.
+4.training_input_fn = lambda: my_input_fn(
+      training_examples,
+      training_targets['median_house_value'],
+      batch_size=batch_size)
+  predict_training_input_fn = lambda: my_input_fn(
+      training_examples,
+      training_targets['median_house_value'],
+      shuffle=False,
+      num_epochs=1)
+  predict_validation_input_fn = lambda: my_input_fn(
+      validation_examples,
+      validation_targets['median_house_value'],
+      shuffle=False,
+      num_epochs=1)
+
+  training_predictions = linear_regressor.predict(input_fn=predict_training_input_fn)
+  training_predictions = np.array([item['predictions'][0] for item in training_predictions])
+    
+  validation_predictions = linear_regressor.predict(input_fn=predict_validation_input_fn)
+  validation_predictions = np.array([item['predictions'][0] for item in validation_predictions])
+
+  linear_regressor = train_model(
+    learning_rate=0.00004,
+    steps=300,
+    batch_size=10,
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+5. 
+california_housing_test_data = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/california_housing_test.csv", sep=",")
+
+features = preprocess_features(california_housing_test_data)
+targets = preprocess_targets(california_housing_test_data)
+
+predict_input_fn = lambda: my_input_fn(
+    features,
+    targets['median_house_value'],
+    shuffle=False,
+    num_epochs=1)
+
+predictions = linear_regressor.predict(input_fn=predict_input_fn)
+predictions = np.array([item['predictions'][0] for item in predictions])
+
+root_mean_squared_error = math.sqrt(
+    metrics.mean_squared_error(predictions, targets))
+
+print("RMSE: %f" % root_mean_squared_error)
+Result: RMSE: 160.715470
+The RMSE of the test data is quite close to the RMSE of the validation set; the validation set finished with an RMSE of 166.30, which is
+reasonably close to the RMSE of 16.72 given by the test data set. This indicates that our model generalizes well.
