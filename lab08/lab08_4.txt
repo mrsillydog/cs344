@@ -2,4 +2,11 @@
 a. K-fold validation allows us to reliably evaluate our model. Since we have so few data points, our validation scores could have a great deal of variance depending on which data points we choose to be in the validation set. K-fold validation removes this variance by instantiating K identical models using K-1/Kths of the total data as the training set and using the final 1/Kth as the validation set. By averaging the validation scores, we can come up with a more accurate overall score for the overall model.
 b. It would simply slow down the neural network's ability to learn. Feeding in data values with wildly different ranges might result in the parameters being altered by overly large amounts, since the current parameters might be really far off from the data in a completely different range on each iteration.
 c. I do agree. Since big networks with lots of units on many layers tend to hypertune parameters, simply because there's more processing that goes on, using a small amount of data on a big network seems like a great way to hypertune to the more prominent particularities of your small amount of data. Using a small network instead would result in less precise tuning and therefore reduce this overfitting, like he says.
-d. I've been trying, unsuccessfully, to get this code running for about 6 hours now. My best guess is that none of the other options perform better; 3 layers because it overfits, 1 layer because it doesn't fit will enough, wider layers because they overfit, narrower layers because they underfit.
+d. The only run I did that improved the value of test_mae_score was with 3 layers and 64 units/layer. I'm assuming that 1 layer with 64 units/layer was worse because the network didn't learn quickly enough, whereas 3 layers with 64 units/layer was better because the network learned faster without reaching the point where it was overfitting. With a width of 32 units/layer and 2 layers, the network again didn't learn quickly enough, and was therefore worse, but with 128 units/layer and 2 layers, it learned too quickly and started to overfit, and was therefore also worse.
+
+80 epochs, batch size 16:
+2 layers, 64 units/layer - 2.5912697
+1 layer, 64 units/layer - 2.8413622 (Worse)
+3 layers, 64 units/layer - 2.4580278 (Better)
+2 layers, 128 units/layer - 2.7720616 (Worse)
+2 layers, 32 units/layer - 3.0116787 (Worse)
