@@ -1,0 +1,6 @@
+Exercise 9.2
+a. Regularizing decreases the number of parameters involved in the model. This makes the model simpler, helping to avoid overfitting and improving efficiency.
+b. L1 regularization encourages the weights on parameters to go to 0. This decreases the number of parameters that actually play a role in the model, therefore increasing sparsity.
+c. LogLoss: 0.25
+   Model Size: 553
+   Gamma: 0.85

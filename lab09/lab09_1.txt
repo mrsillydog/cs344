@@ -1,0 +1,15 @@
+Exercise 9.1
+a. The linear regression approach is not very effective. Instead of steadily decreasing as the periods go by, the RMSE jumps up and down, seemingly at random, with the validation set unsurprisingly consistently having a larger RMSE than the training set.
+b. L2 loss, which the linear regression approach uses, doesn't penalize misclassifications well for probability outputs. Unlike L2 Loss, LogLoss penalizes probability-based output misclassifications in a way that corresponds with the severity of the misclassification much better than L2 Loss. While L2 Loss doesn't penalize differently enough for misclassifications at different probabilities, LogLoss does.
+c. Logistic regression is much more effective for this example than linear regression was. While linear regression increased or decreased the RMSE unpredictably, logistic regression gives us much more predictable, ideal RMSE behavior: a steadily decreasing curve more or less flattening out as the periods increase.
+d. linear_classifier = train_linear_classifier_model(
+    learning_rate=0.00001,
+    steps=20000,
+    batch_size=1000,
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+AUC on the validation set: 0.81
+Accuracy on the validation set: 0.79

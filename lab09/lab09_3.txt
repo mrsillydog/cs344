@@ -1,0 +1,11 @@
+Exercise 9.3
+a. 3, 16 unit hidden layers: Essentially no change in accuracy. Slightly worse at .88008.
+   1, 16 unit hidden layer: Also close to no change in accuracy. Slightly better though, at .88528.
+   2 layers, 32 units each: Worse. Accuracy is now 0.87472.
+   2 layers, 64 units each: Worse. Accuracy is now 0.87788.
+   2 layers, 16 units, mse: Slightly better. Accuracy: 0.8856.
+   2 layers, 16 units, binary_crossentropy, tanh: Worse, Accuracy at .87684.
+
+Substituting mse for binary_crossentropy and doing 1 hidden layer with 16 units resulted in an increase in accuracy. I'd assume that 2 hidden layers slightly overfits compared to 1, so that's why 1 performs better. I don't quite understand why mse performs better than binary_crossentropy on this example; since it's categorization instead of a regression problem, binary_crossentropy should be performing better.
+
+   
