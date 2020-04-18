@@ -1,0 +1,16 @@
+Exercise 10.1
+a. I would rather use Keras. If I were a more experienced model developer and knew how to utilize the greater flexibility of Tensorflow to my advantage, I would probably choose to use it, but as a novice Keras has my vote due to it being significantly simpler to use.
+b. 
+Task 1: 
+dnn_regressor = train_nn_regression_model(
+    learning_rate=0.0005,
+    steps=2000,
+    batch_size=100,
+    hidden_units=[20, 5],
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+Task 2:
+Final RMSE (on test data): 106.96

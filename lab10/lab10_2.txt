@@ -1,0 +1,62 @@
+Exercise 10.2
+a. The Adagrad optimizer modifies the learning rate for each feature in the model dynamically, as opposed to modifying all features by the same unchanging learning rate. This perpetually decreases the effective learning rate.
+b.
+Task 1
+_ = train_nn_regression_model(
+    my_optimizer=tf.train.GradientDescentOptimizer(learning_rate=0.006),
+    steps=4000,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Final RMSE (on training data):   67.03
+Final RMSE (on validation data): 66.90
+
+Task 2
+_, adagrad_training_losses, adagrad_validation_losses = train_nn_regression_model(
+    my_optimizer=tf.train.AdagradOptimizer(learning_rate=0.6),
+    steps=600,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Final RMSE (on training data):   67.99
+Final RMSE (on validation data): 67.88
+
+_, adam_training_losses, adam_validation_losses = train_nn_regression_model(
+    my_optimizer=tf.train.AdamOptimizer(learning_rate=0.01),
+    steps=600,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Final RMSE (on training data):   68.56
+Final RMSE (on validation data): 68.34
+
+Task 3
+
+z_score_normalize:
+
+_ = train_nn_regression_model(
+    my_optimizer=tf.train.GradientDescentOptimizer(learning_rate=0.0015),
+    steps=5000,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+Final RMSE (on training data):   67.24
+Final RMSE (on validation data): 66.93
+
+c. I skipped the optional challenge.

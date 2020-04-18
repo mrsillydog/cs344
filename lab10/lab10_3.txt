@@ -1,0 +1,5 @@
+Exercise 10.3
+a. The confusion matrix indicates which classes, or digits, are commonly misclassified as each other. It displays both the number of each class that were correctly classified, and the number examples of the class that were incorrectly classified as each other class.
+b. The TensorFlow network architecture had 2 hidden layers, just like the Keras network architecture given in class, but instead of having a 512 node layer with a relu activation and a 10 node layer with a softmax activation, the TF hidden layers each had 100 nodes with a relu activation function.
+I couldn't seem to make any significant improvements over the baseline testset accuracy for this task.
+c. At 10 steps, the images are basically completely pixelated and randomly colored. There doesn't seem to be any pattern at all. At 1000 steps, they're still grainy, but some patterns are apparent and easily discerned.

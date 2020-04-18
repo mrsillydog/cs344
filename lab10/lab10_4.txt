@@ -1,0 +1,5 @@
+Exercise 10.4
+a. i. For both cats and dogs, there are 1000 training images and 500 validation images in the datasets. Each image is a 150x150 image.
+  ii. The first CNN has an input layer, unlike the one we did in class, and additionally has an extra final max pooling layer in between the final convolution layer and the flattening layer that the example we did in class didn't have. Also, every layer has significantly more nodes than the one we did in class, with the exception of the final Dense layer.
+ iii. The obvious pattern is that the representations become increasingly less understandable to the human eye as the processing of the image through the neural network continues. At first, you can more or less tell that the representation is of a cat, but by the end it seems to just be random colored pixels.
+b. I skipped Exercises 2 & 3.
