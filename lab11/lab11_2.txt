@@ -1,0 +1,37 @@
+Exercise 11.2
+a. Examining the histogram for race, we can note that ~85% of the examples are White. This is indicative of data skew, as we would expect the examples to be more balanced racially. Similar ideas can be applied to the gender histogram; instead of the expected 50/50 female-male split expected, about ~67% of the examples are male.
+b. With Binning | X-Axis set to gender and Color By and Label By set to income_bracket, it became extremely obvious that the percentage of males that belong to the > 50k income bracket is much higher than the corresponding percentage for females. This indicates that high-income females are underrepresented in our data.
+c.
+d. The model seems to perform significantly better for White and Asian-Pac-Islander than for Black or Amer-Indian-Eskimo, with the former two having noticeably higher Precision and Recall than the latter two. It's also worth noting that the False Positive Rate is much higher for the former two than the latter two; this indicates that the when the reality is a <50k income, the model is much more likely to categorize White and A-P-I as in the upper income bracket than Black and A-I-E.
+
+White
+
+1893-1475
+779-8823
+
+Precision Recall False Positive Rate 
+ 0.7085 0.5621 0.0811 
+
+Black
+
+77-91
+45-1198
+
+Precision Recall False Positive Rate 
+ 0.6311 0.4583 0.0362 
+
+Asian-Pac-Islander
+
+76-45
+32-255
+
+Precision Recall False Positive Rate 
+ 0.7037 0.6281 0.1115 
+
+Amer-Indian-Eskimo
+
+8-11
+5-125
+
+Precision Recall False Positive Rate 
+ 0.6154 0.4211 0.0385 

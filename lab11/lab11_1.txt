@@ -1,0 +1,46 @@
+Exercise 11.1
+a. Yes. Since every model's viability is entirely driven by amount of data available, and said data's peculiarities, a linear model will certainly perform better on some data than a deep neural network. In particular, data which exhibits linear dependencies will likely be more suited to a linear model, if only due to the increased efficiency of a linear model.
+b. Yes. The linear model had an accuracy of 0.78612 on the training set, and 0.78216 on the testing set. The deep neural net model had superior accuracy in both categories, at 0.88 and 0.8 respectively.
+c. Embeddings don't seem to do much at all for sentiment analysis tasks. The resulting accuracy after adding an embedding was barely different from the linear model, at 0.78588 on the training set and 0.78252 on the testing set. This doesn't seem to make much intuitive sense to me, since I'd assume that embeddings would group similar words well, which would be quite helpful in sentiment analysis, but the data seems to indicate otherwise.
+d. Worst and waste have very similar embeddings. This makes sense because the movies that tend to feel the worst aren't the ones that are so bad that they're actually redeeming in their badness, but rather the ones that feel as if they were just a total waste of time. So it makes sense that the movies which are described as the "worst" are the ones which are also described as a "waste."
+e.
+
+terms_embedding_column = tf.feature_column.embedding_column(terms_feature_column, dimension=10)
+feature_columns = [ terms_embedding_column ]
+
+my_optimizer = tf.train.AdamOptimizer(learning_rate=0.15)
+my_optimizer = tf.contrib.estimator.clip_gradients_by_norm(my_optimizer, 5.0)
+
+classifier = tf.estimator.DNNClassifier(
+  feature_columns=feature_columns,
+  hidden_units=[5,5],
+  optimizer=my_optimizer
+)
+
+Training set metrics:
+accuracy 0.94868
+accuracy_baseline 0.5
+auc 0.98791265
+auc_precision_recall 0.98873836
+average_loss 0.15073076
+label/mean 0.5
+loss 3.768269
+precision 0.96270937
+prediction/mean 0.46732095
+recall 0.93352
+global_step 1000
+
+Test set metrics:
+accuracy 0.87188
+accuracy_baseline 0.5
+auc 0.94225335
+auc_precision_recall 0.9421878
+average_loss 0.37323484
+label/mean 0.5
+loss 9.330871
+precision 0.9028512
+prediction/mean 0.4441259
+recall 0.83344
+global_step 1000
+
+f. I skipped this section.
