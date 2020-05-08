@@ -1,0 +1,32 @@
+Exercise 13.2
+on(a,b)
+on(b,c)
+supports(table,c)
+AxAy supports(x,y) => on(y,x)
+AxAy on(x,y) => above(x,y)
+AxAyAz above(x,y) ^ above(y,z) => above(x,z)
+
+Suppose:
+1. !above(a,table) ^ on(a,b) ^ on(b,c) ^ supports(table,c)
+
+Through (AxAy supports(x,y) => on(y,x))
+	^ supports(table,c)
+
+2. !above(a,table) ^ on(a,b) ^ on(b,c) ^ on(c,table)
+
+Through (AxAy on(x,y) => above(x,y)) 
+	^ on(a,b) ^ on(b,c) ^ on(c,table)
+
+3. !above(a,table) ^ above(a,b) ^ above(b,c) ^ above(c,table)
+
+Through (AxAyAz above(x,y) ^ above(y,z) => above(x,z)) 
+	^ above(b,c) ^ above(c,table)
+
+4. !above(a,table) ^ above(a,b) ^ above(b,table)
+
+Through AxAyAz (above(x,y) ^ above(y,z) => above(x,z)) 
+	^ above(a,b) ^ above(b,table)
+
+5. !above(a,table) ^ above(a,table)
+
+Contradiction. Therefore, above(a,table) must be true.
